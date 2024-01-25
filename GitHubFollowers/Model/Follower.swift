@@ -7,8 +7,7 @@
 
 import Foundation
 
-struct Follower: Codable {
+struct Follower: Codable, Hashable { // Hashable for UICollectionViewDiffableDataSource
     var login: String
     var avatarUrl: String
-    
 }
