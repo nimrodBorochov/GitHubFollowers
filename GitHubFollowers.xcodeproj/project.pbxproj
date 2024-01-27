@@ -37,6 +37,9 @@
 		F3563FE62B62F89C00F17243 /* GFItemInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3563FE52B62F89C00F17243 /* GFItemInfoVC.swift */; };
 		F3563FE82B62FD1B00F17243 /* GFRepoItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3563FE72B62FD1B00F17243 /* GFRepoItemVC.swift */; };
 		F3563FEA2B62FEBF00F17243 /* GFFollowerItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3563FE92B62FEBF00F17243 /* GFFollowerItemVC.swift */; };
+		F3563FED2B6395C800F17243 /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3563FEC2B6395C800F17243 /* Date+Ext.swift */; };
+		F3563FEF2B6395F800F17243 /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3563FEE2B6395F800F17243 /* String+Ext.swift */; };
+		F3563FF12B63C9E400F17243 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3563FF02B63C9E400F17243 /* PersistenceManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +75,9 @@
 		F3563FE52B62F89C00F17243 /* GFItemInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFItemInfoVC.swift; sourceTree = "<group>"; };
 		F3563FE72B62FD1B00F17243 /* GFRepoItemVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFRepoItemVC.swift; sourceTree = "<group>"; };
 		F3563FE92B62FEBF00F17243 /* GFFollowerItemVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFFollowerItemVC.swift; sourceTree = "<group>"; };
+		F3563FEC2B6395C800F17243 /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
+		F3563FEE2B6395F800F17243 /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
+		F3563FF02B63C9E400F17243 /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +152,8 @@
 			children = (
 				F3563FBB2B5AD97100F17243 /* UIViewController+Ext.swift */,
 				F3563FB12B59B89800F17243 /* UIView+Ext.swift */,
+				F3563FEC2B6395C800F17243 /* Date+Ext.swift */,
+				F3563FEE2B6395F800F17243 /* String+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -174,6 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				F3563FC72B5BF50E00F17243 /* NetworkManager.swift */,
+				F3563FF02B63C9E400F17243 /* PersistenceManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -341,17 +350,20 @@
 				F3563FC52B5BF10800F17243 /* User.swift in Sources */,
 				F3563FCE2B5D300800F17243 /* FollowerCell.swift in Sources */,
 				F3563FD02B5D308600F17243 /* GFAvatarImageView.swift in Sources */,
+				F3563FF12B63C9E400F17243 /* PersistenceManager.swift in Sources */,
 				F3563FE82B62FD1B00F17243 /* GFRepoItemVC.swift in Sources */,
 				F3563FBA2B5A7BBF00F17243 /* GFAlertVC.swift in Sources */,
 				F3563FDC2B625EE700F17243 /* UserInfoVC.swift in Sources */,
 				F3563FC32B5BF04600F17243 /* Follower.swift in Sources */,
 				F3563F982B59478100F17243 /* SceneDelegate.swift in Sources */,
 				F3563FB62B5A782200F17243 /* GFTitleLabel.swift in Sources */,
+				F3563FEF2B6395F800F17243 /* String+Ext.swift in Sources */,
 				F3563FB42B59C0EA00F17243 /* FollowerListVC.swift in Sources */,
 				F3563FE62B62F89C00F17243 /* GFItemInfoVC.swift in Sources */,
 				F3563FEA2B62FEBF00F17243 /* GFFollowerItemVC.swift in Sources */,
 				F3563FCB2B5C6DC700F17243 /* GFError.swift in Sources */,
 				F3563FD22B5D53B500F17243 /* UIHelper.swift in Sources */,
+				F3563FED2B6395C800F17243 /* Date+Ext.swift in Sources */,
 				F3563FC82B5BF50E00F17243 /* NetworkManager.swift in Sources */,
 				F3563FB22B59B89800F17243 /* UIView+Ext.swift in Sources */,
 				F3563FE42B62F17300F17243 /* GFItemInfoView.swift in Sources */,
@@ -506,7 +518,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -537,7 +549,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

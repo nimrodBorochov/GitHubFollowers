@@ -20,6 +20,7 @@ class GFItemInfoVC: UIViewController {
     let actionButton = GFButton()
 
     var user: User
+    weak var delegate: UserInfoVCDelegate?
 
     init(user: User) {
         self.user = user
@@ -36,6 +37,7 @@ class GFItemInfoVC: UIViewController {
         view.addSubviews(stackView, actionButton)
         setupConstraint()
         configureStackView()
+        actionButton.addTarget(self, action: #selector(actionButtonTapped), for: .touchUpInside)
     }
 
     private func configureBackgroundView() {
@@ -49,6 +51,8 @@ class GFItemInfoVC: UIViewController {
         stackView.addArrangedSubview(itemInfoViewOne)
         stackView.addArrangedSubview(itemInfoViewTwo)
     }
+
+    @objc func actionButtonTapped() {}
 
     private func setupConstraint() {
         let padding: CGFloat = 20
