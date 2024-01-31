@@ -40,6 +40,7 @@
 		F3563FED2B6395C800F17243 /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3563FEC2B6395C800F17243 /* Date+Ext.swift */; };
 		F3563FEF2B6395F800F17243 /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3563FEE2B6395F800F17243 /* String+Ext.swift */; };
 		F3563FF12B63C9E400F17243 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3563FF02B63C9E400F17243 /* PersistenceManager.swift */; };
+		F3563FF32B64F3C200F17243 /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3563FF22B64F3C200F17243 /* FavoriteCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +79,7 @@
 		F3563FEC2B6395C800F17243 /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 		F3563FEE2B6395F800F17243 /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
 		F3563FF02B63C9E400F17243 /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
+		F3563FF22B64F3C200F17243 /* FavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,6 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				F3563FCD2B5D300800F17243 /* FollowerCell.swift */,
+				F3563FF22B64F3C200F17243 /* FavoriteCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -351,6 +354,7 @@
 				F3563FCE2B5D300800F17243 /* FollowerCell.swift in Sources */,
 				F3563FD02B5D308600F17243 /* GFAvatarImageView.swift in Sources */,
 				F3563FF12B63C9E400F17243 /* PersistenceManager.swift in Sources */,
+				F3563FF32B64F3C200F17243 /* FavoriteCell.swift in Sources */,
 				F3563FE82B62FD1B00F17243 /* GFRepoItemVC.swift in Sources */,
 				F3563FBA2B5A7BBF00F17243 /* GFAlertVC.swift in Sources */,
 				F3563FDC2B625EE700F17243 /* UserInfoVC.swift in Sources */,
