@@ -9,16 +9,8 @@ import UIKit
 
 class GFAlertVC: UIViewController {
 
-    let containerView: UIView = { // TODO: speared to file
-        let view = UIView()
-        view.backgroundColor = .systemBackground
-        view.layer.cornerRadius = 16
-        view.layer.borderWidth = 2
-        view.layer.borderColor = UIColor.white.cgColor
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-
+    let containerView = GFAlertContainerView()
+    
     let titleLabel: GFTitleLabel = {
         let label = GFTitleLabel(textAlignment: .center, fontSize: 20)
         label.text = "Something went wrong"
@@ -32,13 +24,7 @@ class GFAlertVC: UIViewController {
         return label
     }()
 
-    let actionButton: GFButton = {
-        let button = GFButton(backgroundColor: .systemPink, title: "OK")
-        button.setTitle("OK", for: .normal)
-        return button
-    }()
-
-    let padding: CGFloat = 20
+    let actionButton = GFButton(backgroundColor: .systemPink, title: "OK")
 
     init(alertTitle: String, message: String, buttonTitle: String) {
         super.init(nibName: nil, bundle: nil)
@@ -56,13 +42,15 @@ class GFAlertVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.75)
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.75)
         containerView.addSubviews(titleLabel, actionButton, messageLabel)
         view.addSubview(containerView)
         setupConstraint()
     }
 
     private func setupConstraint() {
+        let padding: CGFloat = 20
+
         NSLayoutConstraint.activate([
             containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
