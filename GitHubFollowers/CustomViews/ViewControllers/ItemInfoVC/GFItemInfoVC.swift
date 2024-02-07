@@ -51,7 +51,9 @@ class GFItemInfoVC: UIViewController {
         stackView.addArrangedSubview(itemInfoViewTwo)
     }
 
-    @objc func actionButtonTapped() {}
+    @objc func actionButtonTapped() {
+        print("ma")
+    }
 
     private func setupConstraint() {
         let padding: CGFloat = 20

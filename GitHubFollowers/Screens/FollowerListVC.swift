@@ -24,16 +24,18 @@ class FollowerListVC: GFDataLoadingVC {
     var collectionView: UICollectionView!
     var dataSource: UICollectionViewDiffableDataSource<Section, Follower>!
 
+
     init(username: String) {
         self.username = username
         super.init(nibName: nil, bundle: nil)
         title = username
+
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -76,29 +78,26 @@ class FollowerListVC: GFDataLoadingVC {
         searchController.obscuresBackgroundDuringPresentation = false
         navigationItem.searchController = searchController
     }
-    
+
     private func getFollowers(page: Int) {
         showLoadingView()
         isLoadingMoreFollowers = true
 
-        NetworkManager.shared.getFollowers(for: username, page: page) { [weak self] result in
-
-            guard let self else { return }
-
-            self.dismissLoadingView()
-
-            switch result {
-
-            case .success(let followers):
-                self.updateUI(with: followers)
-
-            case .failure(let error):
-                self.presentGFAlertOnMainThread(title: "Bas Stuff Happened",
-                                                message: error.rawValue,
-                                                buttonTitle: "Ok")
+        Task {
+            do {
+                let followers = try await NetworkManager.shared.getFollowers(for: username, page: page)
+                updateUI(with: followers)
+                dismissLoadingView()
+            } catch {
+                if let gfError = error as? GFError {
+                    presentGFAlert(title: "Bas Stuff Happened",
+                                   message: gfError.rawValue,
+                                   buttonTitle: "Ok")
+                } else {
+                    presentDefaultAlert()
+                }
+                dismissLoadingView()
             }
-
-            isLoadingMoreFollowers = false
         }
     }
 
@@ -134,23 +133,24 @@ class FollowerListVC: GFDataLoadingVC {
         snapshot.appendItems(followers)
         DispatchQueue.main.async { self.dataSource.apply(snapshot, animatingDifferences: true) }
     }
-    
-    @objc func addButtonTapped() {
+
+    @objc func addButtonTapped() async {
         showLoadingView()
 
-        NetworkManager.shared.getUserInfo(for: username) { [weak self] result in
-            guard let self else { return }
+        do {
+            let user = try await NetworkManager.shared.getUserInfo(for: username)
+            addUserToFavorites(user)
             self.dismissLoadingView()
-
-            switch result {
-            case .success(let user):
-                self.addUserToFavorites(user)
-
-            case .failure(let error):
-                self.presentGFAlertOnMainThread(title: "Something went wrong",
-                                                message: error.rawValue,
-                                                buttonTitle: "Ok")
+        } catch {
+            if let gfError = error as? GFError {
+                presentGFAlert(title: "Something went wrong",
+                               message: gfError.rawValue,
+                               buttonTitle: "Ok")
+            } else {
+                presentDefaultAlert()
             }
+
+            self.dismissLoadingView()
         }
     }
 
@@ -161,16 +161,20 @@ class FollowerListVC: GFDataLoadingVC {
                                       actionType: .add) { [weak self] error in
             guard let self else { return }
             guard let error else {
-                self.presentGFAlertOnMainThread(title: "Success!",
-                                                message: "You have successfully favorited this user 🎉.",
-                                                buttonTitle: "Hooray!")
+                DispatchQueue.main.async {
+                    self.presentGFAlert(title: "Success!",
+                                        message: "You have successfully favorited this user 🎉.",
+                                        buttonTitle: "Hooray!")
+                }
                 return
             }
-
-            self.presentGFAlertOnMainThread(title: "Something went wrong",
-                                            message: error.rawValue,
-                                            buttonTitle: "Ok")
+            DispatchQueue.main.async {
+                self.presentGFAlert(title: "Something went wrong",
+                                    message: error.rawValue,
+                                    buttonTitle: "Ok")
+            }
         }
+
     }
 }
 

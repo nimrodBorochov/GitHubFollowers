@@ -18,6 +18,7 @@ class GFFollowerItemVC: GFItemInfoVC {
     init(user: User, delegate: GFFollowerItemVCDelegate? = nil) {
         super.init(user: user)
         self.delegate = delegate
+        print("GFFollowerItemVC init")
     }
     
     required init?(coder: NSCoder) {
@@ -34,10 +35,12 @@ class GFFollowerItemVC: GFItemInfoVC {
         itemInfoViewOne.set(itemInfoType: .followers, withCount: user.followers)
         itemInfoViewTwo.set(itemInfoType: .following, withCount: user.following)
 
-        actionButton.set(backgroundColor: .systemGreen, title: "Git Followers")
+        actionButton.set(color: .systemGreen, title: "Git Followers", systemImageName: "person.3")
     }
 
     override func actionButtonTapped() {
         delegate?.didTapGetFollowers(for: user)
+        print("actionButtonTapped")
+
     }
 }

@@ -24,8 +24,8 @@ class GFAlertVC: UIViewController {
         return label
     }()
 
-    let actionButton = GFButton(backgroundColor: .systemPink, title: "OK")
-
+    let actionButton = GFButton(color: .systemPink, title: "Ok", systemImageName: "checkmark.circle")
+    
     init(alertTitle: String, message: String, buttonTitle: String) {
         super.init(nibName: nil, bundle: nil)
 
