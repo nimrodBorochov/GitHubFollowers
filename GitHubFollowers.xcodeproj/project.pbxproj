@@ -196,8 +196,8 @@
 		F3563FC92B5C6D9E00F17243 /* Utilites */ = {
 			isa = PBXGroup;
 			children = (
-				F3563FCA2B5C6DC700F17243 /* GFError.swift */,
 				F3563FD12B5D53B500F17243 /* UIHelper.swift */,
+				F3563FCA2B5C6DC700F17243 /* GFError.swift */,
 				F3563FE12B6281CC00F17243 /* Constants.swift */,
 			);
 			path = Utilites;
