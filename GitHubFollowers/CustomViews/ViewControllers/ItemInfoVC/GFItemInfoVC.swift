@@ -20,7 +20,6 @@ class GFItemInfoVC: UIViewController {
     let actionButton = GFButton()
 
     var user: User
-    weak var delegate: UserInfoVCDelegate?
 
     init(user: User) {
         self.user = user
@@ -67,7 +66,6 @@ class GFItemInfoVC: UIViewController {
             actionButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             actionButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
             actionButton.heightAnchor.constraint(equalToConstant: 44),
-
         ])
     }
 }

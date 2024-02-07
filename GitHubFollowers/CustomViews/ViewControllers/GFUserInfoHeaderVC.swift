@@ -98,7 +98,7 @@ class GFUserInfoHeaderVC: UIViewController {
             bioLabel.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: textImagePadding),
             bioLabel.leadingAnchor.constraint(equalTo: avatarImageView.leadingAnchor),
             bioLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            bioLabel.heightAnchor.constraint(equalToConstant: 60), // githab limit bio text so 3 lines
+            bioLabel.heightAnchor.constraint(equalToConstant: 90), // githab limit bio text so 3 lines
         ])
     }
 }
