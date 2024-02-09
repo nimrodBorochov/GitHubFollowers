@@ -53,6 +53,21 @@ class FollowerListVC: GFDataLoadingVC {
         navigationItem.hidesSearchBarWhenScrolling = false
     }
 
+    @available(iOS 17.0, *)
+    override func updateContentUnavailableConfiguration(using state: UIContentUnavailableConfigurationState) {
+        if followers.isEmpty && !isLoadingMoreFollowers {
+            var config = UIContentUnavailableConfiguration.empty()
+            config.image = .init(systemName: "person.slash")
+            config.text = "No Followers"
+            config.secondaryText = "This user has no followers. Go follow them!"
+            contentUnavailableConfiguration = config
+        } else if isSearching && filteredFollowers.isEmpty {
+            contentUnavailableConfiguration = UIContentUnavailableConfiguration.search()
+        } else {
+            contentUnavailableConfiguration = nil
+        }
+    }
+
     private func configureVC() {
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -104,16 +119,19 @@ class FollowerListVC: GFDataLoadingVC {
     private func updateUI(with followers: [Follower]) {
         if followers.count < 100 { self.hasMoreFollowers = false }
         self.followers.append(contentsOf: followers)
-
-        if self.followers.isEmpty {
-            let message = "This user doesn't have any followers. Go follow them 😀."
-            DispatchQueue.main.async {
-                self.showEmptyStateView(with: message, in: self.view)
-            }
-            return
-        }
-
         self.updateData(on: self.followers)
+
+        if #available(iOS 17.0, *) {
+            setNeedsUpdateContentUnavailableConfiguration()
+        } else {
+            if self.followers.isEmpty {
+                let message = "This user doesn't have any followers. Go follow them 😀."
+                DispatchQueue.main.async {
+                    self.showEmptyStateView(with: message, in: self.view)
+                }
+                return
+            }
+        }
     }
 
     private func configureDataSource() {
@@ -134,23 +152,25 @@ class FollowerListVC: GFDataLoadingVC {
         DispatchQueue.main.async { self.dataSource.apply(snapshot, animatingDifferences: true) }
     }
 
-    @objc func addButtonTapped() async {
+    @objc func addButtonTapped() {
         showLoadingView()
 
-        do {
-            let user = try await NetworkManager.shared.getUserInfo(for: username)
-            addUserToFavorites(user)
-            self.dismissLoadingView()
-        } catch {
-            if let gfError = error as? GFError {
-                presentGFAlert(title: "Something went wrong",
-                               message: gfError.rawValue,
-                               buttonTitle: "Ok")
-            } else {
-                presentDefaultAlert()
-            }
+        Task {
+            do {
+                let user = try await NetworkManager.shared.getUserInfo(for: username)
+                addUserToFavorites(user)
+                self.dismissLoadingView()
+            } catch {
+                if let gfError = error as? GFError {
+                    presentGFAlert(title: "Something went wrong",
+                                   message: gfError.rawValue,
+                                   buttonTitle: "Ok")
+                } else {
+                    presentDefaultAlert()
+                }
 
-            self.dismissLoadingView()
+                self.dismissLoadingView()
+            }
         }
     }
 
@@ -216,6 +236,9 @@ extension FollowerListVC: UISearchResultsUpdating {
         isSearching = true
         filteredFollowers = followers.filter { $0.login.lowercased().contains(filter.lowercased()) }
         updateData(on: filteredFollowers)
+        if #available(iOS 17.0, *) {
+            setNeedsUpdateContentUnavailableConfiguration()
+        }
     }
 }
 

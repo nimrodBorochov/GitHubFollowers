@@ -31,6 +31,19 @@ class FavoritesListVC: GFDataLoadingVC {
         navigationController?.navigationBar.prefersLargeTitles = true
     }
 
+    @available(iOS 17.0, *)
+    override func updateContentUnavailableConfiguration(using state: UIContentUnavailableConfigurationState) {
+        if favorites.isEmpty {
+            var config = UIContentUnavailableConfiguration.empty()
+            config.image = .init(systemName: "star")
+            config.text = "No Favorites"
+            config.secondaryText = "Add favorite on follower list screen"
+            contentUnavailableConfiguration = config
+        } else {
+            contentUnavailableConfiguration = nil
+        }
+    }
+
     private func configureTableView() {
         view.addSubview(tableView)
         tableView.rowHeight = 80
@@ -57,15 +70,23 @@ class FavoritesListVC: GFDataLoadingVC {
     }
 
     private func updateUI(with favorites: [Follower]) {
-        if favorites.isEmpty {
-            self.showEmptyStateView(with: "No Favorites?\nAdd one on the follower screen.",
-                                    in: self.view)
+        self.favorites = favorites
+
+        if #available(iOS 17.0, *) {
+            setNeedsUpdateContentUnavailableConfiguration()
+            reloadTableOnMailThread()
         } else {
-            self.favorites = favorites
-            DispatchQueue.main.async  {
-                self.tableView.reloadData()
-                self.view.bringSubviewToFront(self.tableView)
-            }
+            if favorites.isEmpty {
+                self.showEmptyStateView(with: "No Favorites?\nAdd one on the follower screen.",
+                                        in: self.view)
+            } else { reloadTableOnMailThread() }
+        }
+    }
+
+    private func reloadTableOnMailThread() {
+        DispatchQueue.main.async  {
+            self.tableView.reloadData()
+            self.view.bringSubviewToFront(self.tableView)
         }
     }
 }
@@ -98,6 +119,13 @@ extension FavoritesListVC: UITableViewDelegate, UITableViewDataSource {
             guard let error else { // No err
                 self.favorites.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .left)
+
+                if #available(iOS 17.0, *) {
+                    setNeedsUpdateContentUnavailableConfiguration()
+                }  else if self.favorites.isEmpty {
+                    self.showEmptyStateView(with: "No Favorites?\nAdd one on the follower screen.",
+                                            in: self.view)
+                }
                 return
             }
 
@@ -106,11 +134,6 @@ extension FavoritesListVC: UITableViewDelegate, UITableViewDataSource {
                                     message: error.rawValue,
                                     buttonTitle: "Ok")
             }
-        }
-
-        if favorites.isEmpty {
-            self.showEmptyStateView(with: "No Favorites?\nAdd one on the follower screen.",
-                                    in: self.view)
         }
     }
 }

@@ -5,7 +5,7 @@
 //  Created by Nimrod Borochov on 21/01/2024.
 //
 
-import UIKit
+import SwiftUI
 
 class FollowerCell: UICollectionViewCell {
     
@@ -25,8 +25,13 @@ class FollowerCell: UICollectionViewCell {
     }
     
     func set(follower: Follower) {
-        usernameLabel.text = follower.login
-        avatarImageView.downloadImage(fromURL: follower.avatarUrl)
+        if #available(iOS 16.0, *) { // SwiftUI "cell"
+            contentConfiguration = UIHostingConfiguration { FollowerView(follower: follower) }
+        } else {
+//             Fallback on earlier versions
+            usernameLabel.text = follower.login
+            avatarImageView.downloadImage(fromURL: follower.avatarUrl)
+        }
     }
 
     private func setupConstraints() {

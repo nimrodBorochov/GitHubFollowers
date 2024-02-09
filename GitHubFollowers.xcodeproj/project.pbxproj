@@ -43,6 +43,7 @@
 		F3692C222B6A439A007359CD /* GFTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3692C212B6A439A007359CD /* GFTabBarController.swift */; };
 		F3692C242B6A5D92007359CD /* GFAlertContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3692C232B6A5D92007359CD /* GFAlertContainerView.swift */; };
 		F3692C262B6A69EA007359CD /* GFDataLoadingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3692C252B6A69EA007359CD /* GFDataLoadingVC.swift */; };
+		F38F01172B74ADD6002796EF /* FollowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F38F01162B74ADD6002796EF /* FollowerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,6 +85,7 @@
 		F3692C212B6A439A007359CD /* GFTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFTabBarController.swift; sourceTree = "<group>"; };
 		F3692C232B6A5D92007359CD /* GFAlertContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFAlertContainerView.swift; sourceTree = "<group>"; };
 		F3692C252B6A69EA007359CD /* GFDataLoadingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFDataLoadingVC.swift; sourceTree = "<group>"; };
+		F38F01162B74ADD6002796EF /* FollowerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,7 +208,7 @@
 		F3563FCC2B5D2FBF00F17243 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				F3563FCD2B5D300800F17243 /* FollowerCell.swift */,
+				F38F01152B74AD9E002796EF /* FollowerCell */,
 				F3563FF22B64F3C200F17243 /* FavoriteCell.swift */,
 			);
 			path = Cells;
@@ -283,6 +285,15 @@
 				F3692C212B6A439A007359CD /* GFTabBarController.swift */,
 			);
 			path = TabBarControllers;
+			sourceTree = "<group>";
+		};
+		F38F01152B74AD9E002796EF /* FollowerCell */ = {
+			isa = PBXGroup;
+			children = (
+				F3563FCD2B5D300800F17243 /* FollowerCell.swift */,
+				F38F01162B74ADD6002796EF /* FollowerView.swift */,
+			);
+			path = FollowerCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -383,6 +394,7 @@
 				F3563FEA2B62FEBF00F17243 /* GFFollowerItemVC.swift in Sources */,
 				F3563FCB2B5C6DC700F17243 /* GFError.swift in Sources */,
 				F3563FD22B5D53B500F17243 /* UIHelper.swift in Sources */,
+				F38F01172B74ADD6002796EF /* FollowerView.swift in Sources */,
 				F3563FED2B6395C800F17243 /* Date+Ext.swift in Sources */,
 				F3563FC82B5BF50E00F17243 /* NetworkManager.swift in Sources */,
 				F3563FB22B59B89800F17243 /* UIView+Ext.swift in Sources */,
@@ -538,7 +550,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -569,7 +581,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
